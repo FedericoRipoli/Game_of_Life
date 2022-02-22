@@ -156,9 +156,9 @@ int main (int argc, char **argv) {
         printf("Eseguire <nome programma> [c] <# generazioni> <# righe> [<#colonne>]\n");
         exit(0);
       }
-      anni = atoi(argv[1]);
-      n = atoi(argv[2]);
-      m = atoi(argv[3]);
+      anni = atoi(argv[2]);
+      n = atoi(argv[3]);
+      m = atoi(argv[4]);
   default:
     printf("Numero errato di argomenti\n");
     printf("Eseguire <nome programma> [c] <# generazioni> <# righe> [<# colonne>]\n");

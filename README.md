@@ -3,7 +3,7 @@
 Matricola 0522500921  
 Progetto *Game of Life*
 
-## 1.Introduzione
+## Introduzione
 
 In questo documento verrà descritta l'implementazione del progetto *Game of Life* realizzata da Ripoli Federico.  
 In particolare, il progetto è stato realizzato nel linguaggio C facendo uso della libreria di messaggistica *mpi.h*, quindi operante anche su sistemi cluster.  
@@ -13,11 +13,11 @@ Gli altri due punti, le caratteristiche del C e l'uso del canale di comunicazion
 
 - divisione per colonne, che è più raccomandata per linguaggi come Fortran, essendo *column-based*;
 
-- divisione in quadranti, cioé dividere sia in base alle righe che alle colonne, che avrebbe portato a un maggior numero di messagi nel canale di comunicazione.
+- divisione in quadranti, cioè dividere sia in base alle righe che alle colonne, che avrebbe portato a un maggior numero di messaggi nel canale di comunicazione.
 
 ## Dettagli implementativi
 
-Il programma proposto è stato pensato per lavorare con un gran numero di righe; se il numero risulta troppo basso da non garantire un minimo di computazione non condizionata dallo scambio di messaggi, il programma verrà eseguito su un singolo nodo.Il programma opera su *mondi* generati casualmente, ma per poterlo testare si è usato un *seed* fisso, impostato a 0.
+Il programma proposto è stato pensato per lavorare con un gran numero di righe; se il numero risulta troppo basso da non garantire un minimo di computazione non condizionata dallo scambio di messaggi, il programma verrà eseguito su un singolo nodo. Il programma opera su *mondi* generati casualmente, ma per poterlo testare si è usato un *seed* fisso, impostato a 0.
 
 Al fine di rendere il file sorgente più leggibile e comprensibile, sono state introdotte le seguenti funzioni:
 
@@ -122,9 +122,32 @@ void grow(char* world, int dimR, int dimC) {
 
 La funzione checkLiveness() controlla che ci siano tre o quattro celle vive perché, contando anche se stessa, i valori sono stati incrementati di un'unità, essendo chiamata quando una cella è ***a***; modifica non apportata a checkBirth() perché la funzione viene chiamata solo nel caso di cella ***e***.
 
+### Esecuzione
+
+Per poter eseguire il programma bisogna prima compilarlo con il seguente comando:
+
+```c
+mpicc game_of_life.c -o game
+```
+
+Per comodità abbiamo dato il nome "*game*" al file eseguibile.  
+Successiva eseguiamo il programma con il seguente comando:
+
+```c
+mpirun -np <numero nodi> game [c] <numero generazioni> <numero righe> [numero colonne]
+```
+
+Nello specifico, gli argomenti richiesti sono:
+
+- \<numero nodi> : è il numero di nodi su cui far eseguire il programma;  
+- [ c ] : opzionale, da inserire come primo argomento se si vuole eseguire il test di confronto con l'esecuzione sequenziale;
+- \<numero generazioni> : il numero di generazioni da simulare;
+- \<numero righe> : il numero di righe della matrice;
+- [ numero colonne ] : opzionale, il numero di colonne della matrice, se non inserito verrà generata una matrice quadrata basandosi sul numero di righe.
+
 ## Performance
 
-Le performance sono state ricavate dall'esecuzione del programma su un docker in esecuzione su un computer dual-core a quattro thread, a causa della chiusura prematura dell'account AWS Educate. Questo ha causato anche la generazione di tempi talvolta altalenanti a causa di altri programmi in esecuzione sul computer; i tempi peggiori sono stati scartati, tenendo conto per il testing solo delle tre esecuzioni migliori per ogni configurazione.  
+Le performance sono state ricavate dall'esecuzione del programma su un docker in esecuzione su un computer dual-core a quattro threads, a causa della chiusura prematura dell'account AWS Educate. Questo ha causato anche la generazione di tempi talvolta altalenanti a causa di altri programmi in esecuzione sul computer; i tempi peggiori sono stati scartati, tenendo conto per il testing solo delle tre esecuzioni migliori per ogni configurazione.  
 Per il testing, si è deciso di eseguire il programma con lo sviluppo di 100 generazioni.  
 Le misure di performance estratte e studiate sono state: **scalabilità debole** e **scalabilità forte**.
 
@@ -154,11 +177,11 @@ I dati descritti in questa tabella possono essere riassunti ed esposti nel segue
 
 In cui notiamo che, rispetto a quello che sarebbe lo speed-up scalato ideale, il sistema guadagna velocità d'esecuzione fino all'utilizzo di quattro macchine, rimanendo costante nel caso proviamo a raddoppiare ulteriormente la dimensione *k* del problema e il numero di macchine.  
 
-Inoltre, dalla [tabella precedente](#tabella-scalabilit%C3%A0-debole), possiamo anche etrarre il seguente grafo riguradante l'efficienza dei nodi nelle diverse esecuzioni, secondo la scalabilità debole:
+Inoltre, dalla [tabella precedente](#tabella-scalabilit%C3%A0-debole), possiamo anche estrarre il seguente grafo riguardante l'efficienza dei nodi nelle diverse esecuzioni, secondo la scalabilità debole:
 
 ![Weak Scalability Efficiency](./img/weak-scalability-efficiency.png)
 
-Dal grafo notiamo un drastico calo dell'efficienza nel sistema all'aumentare della dimenzionalità di *k*. La causa di questi valori è imputabile all'architettura del computer, essendo limitato da un processore dual-core con quattro threads.
+Dal grafo notiamo un drastico calo dell'efficienza nel sistema all'aumentare della dimensionalità di *k*. La causa di questi valori è imputabile all'architettura del computer, essendo limitato da un processore dual-core con quattro threads.
 
 ### Scalabilità forte
 
@@ -169,7 +192,7 @@ speed-up = T(k, n) / T(1, n)
 ```
 
 In cui, T(x, y) è il tempo che *x* processori impiegano per eseguire un problema di taglia *y*.  
-I tempi (in minuti) di eecuzione, per diverse grandezze di istanza, sono descritti nella tabella di seguito.
+I tempi (in minuti) di esecuzione, per diverse grandezze di istanza, sono descritti nella tabella di seguito.
 
 | Numero   di nodi | 1000*1000 | 1000*2000 | 2000*2000 | 4000*4000  |
 |----------------|-----------|-----------|-----------|------------|
@@ -195,7 +218,7 @@ Dai tempi illustrati nella precedente tebella ricaviamo gli speed-up descritti n
 |        7       |    1,80   |    1,92   |    2,03   |    1,89   |  1,91 |
 |        8       |    2,00   |    2,18   |    2,13   |    2,09   |  2,10 |
 
-Da questi valori possiamo notare che, indipendentemente dalla taglia del problema, lo speed-up cresce finché non si raggiunge il limite massimo di thread logici del computer, cioé 4, per poi stazionare in valori lievemente inferiori nel caso in cui si provi ad aggiungere ulteriori nodi.  
+Da questi valori possiamo notare che, indipendentemente dalla taglia del problema, lo speed-up cresce finché non si raggiunge il limite massimo di threads logici del computer, cioè 4, per poi stazionare in valori lievemente inferiori nel caso in cui si provi ad aggiungere ulteriori nodi.  
 
 ![Strong Scalability](./img/strong-scalability.png)
 
@@ -220,4 +243,4 @@ Dalla tabella si nota che, efficienza si riduce drasticamente all'aumentare del 
 
 ## Conclusioni
 
-Possimao riassumere che i risultati dei test sono stati molto peggiori di quello che ci si aspettava a causa della mancata possibilità di averli effettuati su un cluster, ed aver simulato quest'ultimo su una macchina non molto performante.
+Possiamo riassumere che i risultati dei test sono stati molto peggiori di quello che ci si aspettava a causa della mancata possibilità di averli effettuati su un cluster, ed aver simulato quest'ultimo su una macchina non molto performante.
