@@ -247,4 +247,6 @@ Dalla tabella si nota che, efficienza si riduce drasticamente all'aumentare del 
 
 ## Conclusioni
 
-Possiamo riassumere che i risultati dei test sono stati molto peggiori di quello che ci si aspettava a causa della mancata possibilità di averli effettuati su un cluster, ed aver simulato quest'ultimo su una macchina non molto performante.
+Possiamo riassumere che i risultati dei test sono stati molto peggiori di quello che ci si aspettava a causa della mancata possibilità di averli effettuati su un cluster reale, ma aver simulato quest'ultimo su una macchina non molto performante.  
+
+Sorvolando sulla questione dell'architettura sulla quale abbiamo eseguito i test, possiamo dedurre dai risultati che, sia nel caso della scalabilità forte che in quella debole, lo speed-up si stabilizza intorno al valore **2** quando viene eseguito con quattro o più macchine.
