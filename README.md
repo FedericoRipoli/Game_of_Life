@@ -1,7 +1,11 @@
-# Ripoli Federico
+# Game of Life report
 
-Matricola 0522500921  
-Progetto *Game of Life*
+| Studente | Ripoli Federico |
+|:---:|:---:|
+| Matricola | 0522500921 |
+| MD5 | 3f783db3da61a4bb1bfc4f680c415ad7|
+| Progetto | *Game of Life* |
+| Istanza EC2 | t2.Xlarge |
 
 ## Introduzione
 
@@ -194,7 +198,7 @@ speed-up = T(k, n) / T(1, n)
 In cui, T(x, y) è il tempo che *x* processori impiegano per eseguire un problema di taglia *y*.  
 I tempi (in minuti) di esecuzione, per diverse grandezze di istanza, sono descritti nella tabella di seguito.
 
-| Numero   di nodi | 1000*1000 | 1000*2000 | 2000*2000 | 4000*4000  |
+| Numero   di nodi | 1000\*1000 | 1000\*2000 | 2000\*2000 | 4000\*4000  |
 |----------------|-----------|-----------|-----------|------------|
 | 1                | 9,190759  | 18,083836 | 38,127372 | 142,606228 |
 | 2                | 6,241977  | 12,511344 | 21,743044 | 89,480694  |
@@ -207,7 +211,7 @@ I tempi (in minuti) di esecuzione, per diverse grandezze di istanza, sono descri
 
 Dai tempi illustrati nella precedente tebella ricaviamo gli speed-up descritti nella seguente tabella.
 
-| Numero di nodi | 1000*1000 | 1000*2000 | 2000*2000 | 4000*4000 | media |
+| Numero di nodi | 1000\*1000 | 1000\*2000 | 2000\*2000 | 4000\*4000 | media |
 |:--------------:|:---------:|:---------:|:---------:|:---------:|:-----:|
 |        1       |    1,00   |    1,00   |    1,00   |    1,00   |  1,00 |
 |        2       |    1,47   |    1,45   |    1,75   |    1,59   |  1,57 |
@@ -226,7 +230,7 @@ Dal grafico illustrato si evidenzia più nitidamente che, per tutte le dimension
 
 Valutiamo, ora l'efficienza dei nodi nel nostro sistema rispetto alla scalabilità forte.
 
-| Numero   di nodi | 1000*1000 | 1000*2000 | 2000*2000 | 4000*4000 | media |
+| Numero   di nodi | 1000\*1000 | 1000\*2000 | 2000\*2000 | 4000\*4000 | media |
 |:----------------:|:---------:|:---------:|:---------:|:---------:|:-----:|
 |         1        |   1,000   |   1,000   |   1,000   |   1,000   | 1,000 |
 |         2        |   0,736   |   0,723   |   0,877   |   0,797   | 0,783 |
