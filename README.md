@@ -177,7 +177,7 @@ I risultati derivanti da questo calcolo sono riportati nella tabella di seguito.
 
 I dati descritti in questa tabella possono essere riassunti ed esposti nel seguente grafico:
 
-![[Weak Scalabillity](#dettagli-implementativi)](./img/weak-scalability.png)
+![[Weak Scalability](#dettagli-implementativi)](./img/weak-scalability.png)
 
 In cui notiamo che, rispetto a quello che sarebbe lo speed-up scalato ideale, il sistema guadagna velocità d'esecuzione fino all'utilizzo di quattro macchine, rimanendo costante nel caso proviamo a raddoppiare ulteriormente la dimensione *k* del problema e il numero di macchine.  
 
@@ -209,7 +209,7 @@ I tempi (in minuti) di esecuzione, per diverse grandezze di istanza, sono descri
 | 7                | 5,104083  | 9,416476  | 18,821977 | 75,527298  |
 | 8                | 4,587389  | 8,279229  | 17,885756 | 68,197637  |
 
-Dai tempi illustrati nella precedente tebella ricaviamo gli speed-up descritti nella seguente tabella.
+Dai tempi illustrati nella precedente tabella ricaviamo gli speed-up descritti nella seguente tabella.
 
 | Numero di nodi | 1000\*1000 | 1000\*2000 | 2000\*2000 | 4000\*4000 | media |
 |:--------------:|:---------:|:---------:|:---------:|:---------:|:-----:|
@@ -249,4 +249,4 @@ Dalla tabella si nota che, efficienza si riduce drasticamente all'aumentare del 
 
 Possiamo riassumere che i risultati dei test sono stati molto peggiori di quello che ci si aspettava a causa della mancata possibilità di averli effettuati su un cluster reale, ma aver simulato quest'ultimo su una macchina non molto performante.  
 
-Sorvolando sulla questione dell'architettura sulla quale abbiamo eseguito i test, possiamo dedurre dai risultati che, sia nel caso della scalabilità forte che in quella debole, lo speed-up si stabilizza intorno al valore **2** quando viene eseguito con quattro o più macchine.
+Possiamo dedurre dai risultati che, sia nel caso della scalabilità forte che in quella debole, lo speed-up si stabilizza intorno al valore **2** quando viene eseguito con quattro o più macchine.
